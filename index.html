@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main  class="main-content container">
+        <div id="main-area" class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label id="fast-total" for="">First Class ($150)</label>
+                    <input id="fast-count" value="1" class="inp-style inp-width" type="number" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="handleProductChange('fast', true);"> <i class="fas fa-plus"> </i> </button>
+                    <button onclick="handleProductChange('fast', false);"> <i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label  id="second-total" for="">Economy ($100)</label>
+                    <input id="second-count" value="1" class="inp-style inp-width" type="number" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="handleProductChange('second', true);"> <i class="fas fa-plus"> </i> </button>
+                    <button onclick="handleProductChange('second', false);"> <i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="Subtotal-price">$250</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p >Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax-price">$25</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$275</p>
+                    </div>
+                </div>
+            </div>
+            <button  id="book-Now" title="submit now sir!" class="btn-style">Book Now</button>
+        </div>
+        <!--end  booking-form end-->
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+    </main>
+
+    <script>
+            // case Count handel 
+      function handleProductChange(product, IsIncrease) {
+         const productInput = document.getElementById(product + '-count');
+         const productCount = parseFloat(productInput.value);
+         // const caseNewCount = caseCount - 1;
+         let productNewCount = productCount;
+         if (IsIncrease == true) {
+            productNewCount = productCount + 1;
+         }
+         if (IsIncrease == false && productCount > 0) {
+            productNewCount = productCount - 1;
+         }
+         productInput.value = productNewCount;
+         // const productTotal = productNewCount * 59;
+         let productTotal = 0;
+         if (product == 'fast') {
+            productTotal = productNewCount * 150;
+         }
+         if (product == 'second') {
+            productTotal = productNewCount * 100;
+         }
+         document.getElementById(product + '-total').innerText ='total ticket price' + '(' + '$' + productTotal +')';
+        calculateTotal ();
+      };
+
+      function calculateTotal (){
+         const fastCount =getInputValue("fast");
+         const secondCount =getInputValue("second");
+
+         const totalPrice = fastCount * 150 + secondCount * 100;
+         document.getElementById('Subtotal-price').innerText ='$' + totalPrice;
+
+         const tax = Math.round( totalPrice * .10 );
+         document.getElementById('tax-price').innerText= '$' + tax ;
+
+         const grandTotal = totalPrice + tax;
+         document.getElementById('grand-total').innerText = '$' + grandTotal;
+      };
+      function getInputValue(product){
+         const productInput = document.getElementById(product +'-count');
+         const productCount = parseInt(productInput.value);
+         return productCount;
+      }
+
+    //   thank you sms
+    document.getElementById('book-Now').addEventListener('click' , function(){
+        alert("successfully done, have a nice journey . sir ..");
+    })
+
+    </script>
+
+
+
+
+    <!--Thank You-->
+</body>
+
+</html>
